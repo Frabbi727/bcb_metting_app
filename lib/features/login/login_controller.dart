@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/routes/app_pages.dart';
 import '../../data/local/local_storage.dart';
@@ -14,9 +15,33 @@ class LoginController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
   final RxBool obscurePassword = true.obs;
+  
+  final RxBool isDarkTheme = false.obs;
+  final RxBool isBangla = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    isDarkTheme.value = _storage.themeMode == 'dark';
+    isBangla.value = _storage.languageCode == 'bn';
+  }
 
   void toggleObscurePassword() {
     obscurePassword.value = !obscurePassword.value;
+  }
+
+  void toggleTheme(bool value) {
+    isDarkTheme.value = value;
+    final targetMode = value ? ThemeMode.dark : ThemeMode.light;
+    Get.changeThemeMode(targetMode);
+    _storage.saveThemeMode(value ? 'dark' : 'light');
+  }
+
+  void toggleLanguage(bool value) {
+    isBangla.value = value;
+    final locale = value ? const Locale('bn', 'BD') : const Locale('en', 'US');
+    Get.updateLocale(locale);
+    _storage.saveLocale(value ? 'bn' : 'en', value ? 'BD' : 'US');
   }
 
   Future<void> login(String email, String password) async {

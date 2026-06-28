@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'core/bindings/initial_binding.dart';
 import 'core/routes/app_pages.dart';
 import 'core/theme/app_theme.dart';
+import 'core/values/api_endpoints.dart';
 import 'core/values/app_translations.dart';
 import 'core/values/env_config.dart';
 import 'data/local/local_storage.dart';
@@ -12,7 +13,7 @@ void main() async {
   // Default to production environment
   await mainCommon(const EnvConfig(
     environment: Environment.production,
-    baseUrl: 'https://api.example.com/v1',
+    baseUrl: ApiEndPoints.prodBaseUrl,
     appTitle: 'BCB Meeting App',
   ));
 }

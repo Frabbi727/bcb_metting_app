@@ -14,6 +14,40 @@ class LoginView extends GetView<LoginController> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Row(
+            children: [
+              Obx(() => Icon(
+                controller.isDarkTheme.value ? Icons.dark_mode : Icons.light_mode,
+                size: 20,
+              )),
+              const SizedBox(width: 4),
+              Obx(() => Switch(
+                value: controller.isDarkTheme.value,
+                onChanged: controller.toggleTheme,
+              )),
+            ],
+          ),
+          const SizedBox(width: 12),
+          Row(
+            children: [
+              Obx(() => Text(
+                controller.isBangla.value ? 'বাংলা' : 'EN',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              )),
+              const SizedBox(width: 4),
+              Obx(() => Switch(
+                value: controller.isBangla.value,
+                onChanged: controller.toggleLanguage,
+              )),
+            ],
+          ),
+          const SizedBox(width: 16),
+        ],
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppDimens.paddingXL),

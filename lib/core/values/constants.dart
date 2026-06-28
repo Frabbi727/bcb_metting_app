@@ -1,6 +1,6 @@
 class AppConstants {
-  static const String baseUrl = 'https://api.example.com/v1'; // Change to actual API URL
-  
+  AppConstants._();
+
   // Storage Keys
   static const String keyToken = 'access_token';
   static const String keyRefreshToken = 'refresh_token';
