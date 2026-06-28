@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import '../../core/values/constants.dart';
+import '../../core/values/env_config.dart';
 import '../local/local_storage.dart';
 import 'api_interceptors.dart';
 
@@ -7,9 +9,11 @@ class ApiClient {
   late final Dio dio;
 
   ApiClient(LocalStorageService storage) {
+    final env = Get.find<EnvConfig>();
+    
     dio = Dio(
       BaseOptions(
-        baseUrl: AppConstants.baseUrl,
+        baseUrl: env.baseUrl,
         connectTimeout: const Duration(milliseconds: AppConstants.connectTimeout),
         receiveTimeout: const Duration(milliseconds: AppConstants.receiveTimeout),
         headers: {

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:bcb_meeting_app/main.dart';
+import 'package:bcb_meeting_app/core/values/env_config.dart';
 import 'package:bcb_meeting_app/data/local/local_storage.dart';
 
 void main() {
@@ -9,6 +10,13 @@ void main() {
     // Initialize storage for testing
     await GetStorage.init();
     
+    // Inject EnvConfig for testing
+    Get.put<EnvConfig>(const EnvConfig(
+      environment: Environment.development,
+      baseUrl: 'https://api.dev.example.com/v1',
+      appTitle: 'BCB App [DEV]',
+    ), permanent: true);
+
     final localStorage = LocalStorageService();
     await localStorage.init();
     Get.put<LocalStorageService>(localStorage, permanent: true);
