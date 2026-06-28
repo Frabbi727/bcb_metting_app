@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../core/values/translation_keys.dart';
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -14,7 +15,7 @@ class HomeView extends GetView<HomeController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.palette),
-            tooltip: 'change_theme'.tr,
+            tooltip: TranslationKeys.changeTheme.tr,
             onPressed: () => controller.toggleTheme(),
           )
         ],
@@ -30,14 +31,14 @@ class HomeView extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'error'.trParams({'error': controller.errorMessage.value}),
+                  TranslationKeys.error.trParams({'error': controller.errorMessage.value}),
                   style: const TextStyle(color: Colors.red),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () => controller.fetchUserProfile("123"),
-                  child: Text('retry'.tr),
+                  child: Text(TranslationKeys.retry.tr),
                 ),
               ],
             ),
@@ -46,7 +47,7 @@ class HomeView extends GetView<HomeController> {
 
         final userData = controller.user.value;
         if (userData == null) {
-          return Center(child: Text('no_data'.tr));
+          return Center(child: Text(TranslationKeys.noData.tr));
         }
 
         return Center(
@@ -54,19 +55,19 @@ class HomeView extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'welcome'.trParams({'name': userData.name}),
+                TranslationKeys.welcome.trParams({'name': userData.name}),
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                'email'.trParams({'email': userData.email}),
+                TranslationKeys.email.trParams({'email': userData.email}),
                 style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 40),
               
               // Language Settings Control
               Text(
-                'change_lang'.tr,
+                TranslationKeys.changeLang.tr,
                 style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 8),
